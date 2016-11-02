@@ -4,7 +4,6 @@ namespace Intercom;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use function GuzzleHttp\Psr7\stream_for;
 use Psr\Http\Message\ResponseInterface;
 
 class IntercomClient
@@ -180,7 +179,7 @@ class IntercomClient
      */
     private function handleResponse(Response $response)
     {
-        $stream = stream_for($response->getBody());
+        $stream = \GuzzleHttp\Psr7\stream_for($response->getBody());
         $data = json_decode($stream->getContents());
         return $data;
     }
